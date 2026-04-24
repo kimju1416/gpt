@@ -632,7 +632,7 @@ tr:hover td{background:var(--surface2)}
   </a>
 </div>
 <div class="tabs">
-  <button class="tab-btn active" onclick="showTab('builder',this)">🛠️ 프롬프트 조립기</button>
+  <button class="tab-btn active" onclick="showTab('builder',this)">🛠️ 프롬프트 빌더</button>
   <button class="tab-btn" onclick="showTab('library',this)">📚 예시 라이브러리</button>
   <button class="tab-btn" onclick="showTab('guide',this)">📖 사용 가이드</button>
 </div>
@@ -939,7 +939,7 @@ function selectPrompt(catId,num){
       +'<div class="lib-section" style="margin-bottom:0"><div class="lib-good"><div class="lib-section-label">✅ 복사용 프롬프트</div><span id="promptText">'+item.good+'</span></div></div>'
       +'<div class="lib-section" style="margin-bottom:0"><div class="lib-tip"><div class="lib-section-label">💡 응용 팁</div>'+item.tip+'</div></div>'
       +'<button class="lib-copy-btn" onclick="libCopyPrompt()">📋 이 프롬프트 복사하기</button>'
-      +'<button class="lib-to-builder-btn" onclick="sendToBuilder()">🛠️ 조립기에서 수정하기</button>';
+      +'<button class="lib-to-builder-btn" onclick="sendToBuilder()">🛠️ 빌에서 수정하기</button>';
     detailEl.appendChild(imgPanel);
     detailEl.appendChild(infoPanel);
   }
