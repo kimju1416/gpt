@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta charset="UTF-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>학교 행사 이미지 프롬프트 가이드 | @kimju.zip</title>
+<title>학교 이미지 프롬프트 가이드 | @kimju.zip</title>
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
@@ -20,9 +21,9 @@
   --accent-dim:rgba(139,92,246,0.10);
   --accent-glow:rgba(139,92,246,0.18);
   --pink:#ec4899;
-  --text:#1e1535;
-  --text-muted:#6b7280;
-  --text-dim:#a78bfa;
+  --text:#0a0514;
+  --text-muted:#374151;
+  --text-dim:#6d3faa;
   --green:#059669;
   --red:#e11d48;
   --yellow:#d97706;
@@ -126,11 +127,15 @@ body{
 
 /* ── TOAST ── */
 .copied-msg{
-  display:none;position:fixed;top:18px;left:50%;transform:translateX(-50%);
-  background:var(--accent);color:#fff;
-  padding:9px 20px;border-radius:99px;
-  font-size:12px;font-weight:600;z-index:999;
-  box-shadow:0 8px 24px rgba(139,92,246,.35);
+  display:none;position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:#1e1535;color:#fff;
+  border:2px solid var(--accent-mid);
+  padding:16px 36px;border-radius:var(--r-lg);
+  font-size:16px;font-weight:700;z-index:9999;
+  box-shadow:0 8px 40px rgba(0,0,0,.5);
+  text-align:center;letter-spacing:.3px;
 }
 
 .tab-content{display:none}
@@ -281,12 +286,18 @@ body{
   background:var(--surface);
   border:1.5px solid var(--border);
   border-radius:var(--r-lg);
-  padding:16px 18px 12px;font-size:13px;
+  padding:16px 18px 12px;font-size:14px;
   line-height:1.85;min-height:130px;
   margin-bottom:20px;color:var(--text);
   word-break:keep-all;box-shadow:var(--shadow);
-  display:flex;flex-direction:column;gap:12px;
 }
+.result-box-text{
+  display:block;width:100%;min-height:90px;
+  outline:none;word-break:keep-all;
+  font-size:15px;line-height:1.85;color:var(--text);
+  margin-bottom:10px;font-weight:500;
+}
+.result-box-text:empty::before{content:attr(data-placeholder);color:#c4b5fd}
 .result-placeholder{color:#c4b5fd;font-size:13px;flex:1}
 .result-box-text{flex:1;word-break:keep-all}
 .result-copy-btn{
@@ -367,18 +378,18 @@ body{
 .lib-prompt-item .item-num{font-size:10px;color:#c4b5fd;min-width:22px;margin-top:1px;flex-shrink:0}
 .lib-prompt-item.active .item-num{color:var(--accent);opacity:.7}
 
-.lib-right{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.lib-right{flex:1;display:flex;flex-direction:column;overflow-y:auto;background:var(--bg)}
 .lib-right-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#c4b5fd;font-size:14px;gap:10px}
 .lib-right-empty .empty-icon{font-size:36px;opacity:.4}
 
-.lib-detail{flex:1;overflow-y:auto;padding:24px 28px;display:none;-webkit-overflow-scrolling:touch}
+.lib-detail{flex:1;overflow-y:auto;padding:20px 22px;display:none;-webkit-overflow-scrolling:touch;min-height:0}
 .lib-detail-header{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
 .lib-detail-badge{
   display:inline-block;background:var(--accent-dim);
   color:var(--accent);font-size:10px;font-weight:700;
   padding:3px 11px;border-radius:99px;margin-bottom:8px;
 }
-.lib-detail-title{font-size:19px;font-weight:700;color:var(--text);line-height:1.35;letter-spacing:-.3px}
+.lib-detail-title{font-size:20px;font-weight:800;color:var(--text);line-height:1.35;letter-spacing:-.3px}
 
 .lib-section{margin-bottom:13px}
 .lib-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
@@ -465,7 +476,7 @@ tr:hover td{background:var(--surface2)}
   #tab-library{height:auto;overflow:visible}
   .lib-layout{flex-direction:column;height:auto;overflow:visible}
   .lib-left{flex:none;width:100%;min-width:unset;max-width:100%;border-right:none;border-bottom:1px solid var(--border);max-height:260px}
-  .lib-right{flex:none;min-height:480px;overflow:visible}
+  .lib-right{flex:none;overflow:visible}
   #tab-guide{height:auto;overflow:visible;padding:12px}
   .form-group input,.form-group textarea,.lib-left-search input{font-size:16px}
   .chip{min-height:36px}.cmd-chip{min-height:38px}.lib-prompt-item{min-height:44px}
@@ -510,7 +521,7 @@ tr:hover td{background:var(--surface2)}
   border-radius:var(--r);overflow:hidden;
   border:1.5px solid var(--border2);background:var(--surface2);
 }
-.detail-img{width:100%;display:block;max-height:280px;object-fit:cover}
+.detail-img{width:100%;display:block;height:auto;border-radius:var(--r-sm)}
 .detail-img-actions{
   display:flex;gap:8px;padding:10px 12px;
   background:var(--surface2);border-top:1px solid var(--border);
@@ -528,16 +539,7 @@ tr:hover td{background:var(--surface2)}
   padding:20px;text-align:center;
   color:var(--text-muted);font-size:12px;
 }
-.add-img-btn{
-  width:100%;padding:14px;
-  background:var(--surface2);
-  border:1.5px dashed var(--border2);
-  border-radius:var(--r);
-  font-size:13px;font-weight:600;
-  cursor:pointer;color:var(--text-muted);
-  font-family:inherit;transition:all .15s;
-  display:flex;align-items:center;justify-content:center;gap:7px;
-}
+
 .add-img-btn:hover{
   border-color:var(--accent);color:var(--accent);
   background:var(--accent-dim);
@@ -651,7 +653,7 @@ tr:hover td{background:var(--surface2)}
       <div class="builder-right-inner">
         <div class="result-header">🚀 생성된 프롬프트</div>
         <div class="result-box" id="result">
-          <span class="result-placeholder">왼쪽 폼을 채우고 생성 버튼을 누르세요.</span>
+          <div class="result-box-text" id="promptContent" contenteditable="true" data-placeholder="왼쪽 폼을 채우고 생성 버튼을 누르세요."></div>
           <button class="result-copy-btn" onclick="copyResult()">📋 복사하기</button>
         </div>
         <div class="section-divider"></div>
@@ -677,10 +679,7 @@ tr:hover td{background:var(--surface2)}
       <div class="lib-cat-list" id="libCatList"></div>
     </div>
     <div class="lib-right">
-      <div class="lib-export-bar">
-        <div class="lib-export-count">📷 예시 이미지 <b id="imgCount">0</b> / 100 등록됨</div>
-        <button class="lib-export-btn" id="exportBtn" onclick="exportWithImages()">📦 배포용 내보내기</button>
-      </div>
+
       <div class="lib-right-empty" id="libEmpty">
         <div class="empty-icon">👈</div>
         <div>왼쪽에서 예시를 선택하세요</div>
@@ -756,8 +755,14 @@ tr:hover td{background:var(--surface2)}
       <div class="tip-card-body"><em>"봄 운동장, 벚꽃 날리는"</em> / <em>"눈 내리는 겨울 교정"</em><br>이런 표현 하나로 계절감이 자연스럽게 살아납니다.</div>
     </div>
     <div class="tip-card">
-      <div class="tip-card-title"><span class="tip-num">③</span> 📐 포스터는 4:5 · PPT·현수막은 16:9</div>
-      <div class="tip-card-body">AR 비율을 프롬프트 <em>맨 끝</em>에 붙이면<br>구도가 더 안정적으로 잡힙니다.</div>
+      <div class="tip-card-title"><span class="tip-num">③</span> 📐 비율 가이드</div>
+      <div class="tip-card-body">
+        <em>3:4</em> — A4 출력용 (가정통신문·세로 포스터)<br>
+        <em>4:5</em> — SNS 포스터 · 인스타그램<br>
+        <em>16:9</em> — 현수막 · PPT · 발표자료<br>
+        <em>1:1</em> — SNS 정방형<br><br>
+        AR 비율을 프롬프트 <em>맨 끝</em>에 붙이면 구도가 더 안정적으로 잡힙니다.
+      </div>
     </div>
     <div class="tip-card">
       <div class="tip-card-title"><span class="tip-num">④</span> 🏫 학교 마크나 참고 이미지를 함께 업로드하세요</div>
@@ -774,6 +779,7 @@ tr:hover td{background:var(--surface2)}
 [{"id":"01","name":"체육행사","items":[{"num":"01","title":"전교 체육대회 홍보 포스터","bad":"체육대회 포스터 이미지 만들어줘.","good":"체육대회 홍보 포스터, 봄 운동장, 달리는 학생들 뒷모습, 응원 피켓이 흩날리는 역동적인 장면. AR 4:5.","tip":"역동감을 높이려면 '로우앵글에서 달리는 발과 트랙만 클로즈업'을 추가하세요."},{"num":"02","title":"운동회 응원 현수막 이미지","bad":"운동회 응원 현수막 배경 이미지.","good":"운동회 응원 현수막, 색색의 응원 도구들이 가득한 가을 운동회 배경, 활기차고 밝은 분위기. AR 16:9.","tip":"초등 운동회는 귀여운 캐릭터 응원단 스타일도 잘 어울립니다."},{"num":"03","title":"체육의 날 학년 행사 안내","bad":"체육의 날 학교 이미지 만들어줘.","good":"체육의 날 안내 이미지, 체육관 바닥에 정돈된 스포츠 용품들, 따뜻한 조명, 체육의 날 안내 이미지. AR 4:5.","tip":"소품만으로 구성하면 초상권 문제 없이 깔끔한 안내 이미지가 됩니다."},{"num":"04","title":"스포츠클럽 모집 홍보 포스터","bad":"스포츠 동아리 모집 이미지.","good":"스포츠클럽 모집 포스터, 다양한 스포츠 볼과 용품들이 역동적으로 배치된 에너지 넘치는 구성. AR 4:5.","tip":"특정 종목 클럽이면 해당 용구를 전면에 크게 배치하면 더 눈에 띕니다."},{"num":"05","title":"학교스포츠클럽대회 출전 응원","bad":"학교 스포츠 대회 응원 이미지.","good":"대회 출전 응원 SNS 이미지, 어두운 체육관 조명 아래 농구골대와 손, 강렬하고 긴장된 경기 분위기. AR 1:1.","tip":"팀 컬러를 반영한 유니폼 색상을 프롬프트에 추가하면 학교 색상과 맞출 수 있어요."},{"num":"06","title":"줄넘기·체력장 안내 이미지","bad":"줄넘기 대회 학교 이미지.","good":"줄넘기 대회 안내 포스터, 운동장 위 줄넘기 줄과 뛰는 발, 밝은 봄 햇살, 생동감 넘치는 장면. AR 4:5.","tip":"PAPS 체력검사 안내에도 같은 스타일로 활용할 수 있습니다."},{"num":"07","title":"수영·물놀이 안전교육 이미지","bad":"수영 안전교육 이미지 만들어줘.","good":"수영 안전교육 안내 포스터, 수영장 레인을 위에서 바라본 파란 물결과 안전 용품들, 시원하고 깨끗한 분위기. AR 4:5.","tip":"안전교육 이미지는 사람 없이 소품과 배경만으로 구성하는 것이 가장 안전합니다."},{"num":"08","title":"마라톤·달리기 대회 포스터","bad":"학교 마라톤 대회 포스터.","good":"마라톤 대회 홍보 포스터, 아침 거리 위의 러닝화와 출발선, 도전적이고 역동적인 마라톤 대회 분위기. AR 4:5.","tip":"새벽·아침 빛을 배경으로 하면 도전감이 더 잘 표현됩니다."},{"num":"09","title":"학급 대항 배드민턴 대회","bad":"배드민턴 대회 학교 이미지.","good":"배드민턴 대회 안내 이미지, 체육관 코트 위에 교차된 라켓과 공중의 셔틀콕, 스포티하고 경쾌한 분위기. AR 1:1.","tip":"라켓 색상을 학교 상징색으로 지정하면 학교 정체성이 드러납니다."},{"num":"10","title":"체육특기자 선발 안내","bad":"체육 특기자 선발 홍보.","good":"체육특기자 선발 안내 포스터, 다크 배경에 스포츠 용품들이 고급스럽게 놓인 전문적이고 차분한 이미지. AR 4:5.","tip":"특기자 선발은 차분하고 전문적인 톤이 신뢰감을 줍니다."}]},{"id":"02","name":"학사행사","items":[{"num":"11","title":"입학식 환영 이미지","bad":"입학식 학교 이미지 만들어줘.","good":"입학식 환영 포스터, 봄 교문 앞 새 교복 입은 학생 뒷모습, 벚꽃 흩날리는 설레는 입학식 장면. AR 4:5.","tip":"벚꽃 꽃잎이 날리는 연출이 입학식 분위기를 가장 잘 표현합니다."},{"num":"12","title":"졸업식 기념 이미지","bad":"졸업식 학교 이미지.","good":"졸업식 기념 SNS 이미지, 나무 테이블 위의 학사모와 꽃다발, 따뜻한 빛, 감동적인 졸업 분위기. AR 1:1.","tip":"학사모와 꽃다발 조합이 졸업 분위기를 가장 직관적으로 전달합니다."},{"num":"13","title":"졸업식 축하 현수막","bad":"졸업 축하 현수막 이미지.","good":"졸업식 축하 현수막, 황금빛 꽃잎이 날리는 화려하고 격조 있는 졸업 축하 배경. AR 16:9.","tip":"현수막은 텍스트 여백을 중앙 60% 이상 확보하도록 명시하세요."},{"num":"14","title":"종업식·방학식 안내","bad":"종업식 안내 이미지.","good":"종업식 안내 가정통신문, 알록달록한 책가방과 필통, 여름 방학 느낌의 밝고 신나는 종업식 이미지. AR 4:5.","tip":"방학 기분을 내려면 아이스크림·해변 소품을 배경에 살짝 넣으세요."},{"num":"15","title":"새 학기 학교생활 안내","bad":"새 학기 안내 이미지.","good":"새 학기 안내 포스터, 새 교과서와 연필이 정돈된 봄 창가 책상, 설레는 새 학기 분위기. AR 4:5.","tip":"교과서 색깔이 다양할수록 시각적으로 풍부한 이미지가 됩니다."},{"num":"16","title":"전입생 환영 이미지","bad":"전학생 환영 이미지.","good":"전입생 환영 SNS 이미지, 환영 꽃가루와 화환이 날리는 따뜻하고 친근한 전입생 환영 이미지. AR 1:1.","tip":"일러스트 스타일을 요청하면 저작권 없이 귀엽게 만들 수 있어요."},{"num":"17","title":"학기 초 학급 임원 선출","bad":"학급 임원 선거 이미지.","good":"학급 임원 선출 안내 이미지, 투표함과 연필이 있는 깔끔하고 신뢰감 있는 민주적인 선거 장면. AR 1:1.","tip":"투표함 이미지는 민주시민 교육 자료에도 활용할 수 있습니다."},{"num":"18","title":"방학 생활 안내 가정통신문","bad":"방학 생활 안내 이미지.","good":"방학 생활 안내 가정통신문, 선글라스·모자·물놀이 튜브가 가득한 밝은 여름 방학 생활 이미지. AR 4:5.","tip":"겨울방학 버전은 따뜻한 머그컵·목도리·책 소품으로 변환하세요."},{"num":"19","title":"수상식·시상식 배경 이미지","bad":"학교 시상식 배경 이미지.","good":"수상식 배경 이미지, 황금빛 트로피와 리본, 따뜻한 조명의 격조 있는 시상식 배경. AR 16:9.","tip":"트로피 크기를 크게 배치할수록 시상식 느낌이 강해집니다."},{"num":"20","title":"개학 맞이 학교 안내","bad":"개학식 이미지.","good":"개학 안내 SNS 이미지, 가을 단풍잎과 책, 황금·주황 색감의 설레는 개학 분위기. AR 1:1.","tip":"계절에 맞는 색감을 먼저 정하면 이미지 분위기가 자연스럽게 잡힙니다."}]},{"id":"03","name":"독서·도서관","items":[{"num":"21","title":"독서의 달 행사 포스터","bad":"독서의 달 포스터 이미지.","good":"독서의 달 행사 포스터, 따뜻한 조명 아래 서가와 펼쳐진 책, 아늑한 분위기. AR 4:5.","tip":"책 표지에 텍스트가 나오면 깨질 수 있으니 '책 표지 여백 처리'를 명시하세요."},{"num":"22","title":"도서관 이용 안내 이미지","bad":"도서관 이용 안내 이미지.","good":"도서관 이용 안내 이미지, 색깔별로 정리된 도서관 서가, 조용하고 차분한 도서관 이용 안내. AR 1:1.","tip":"도서관 이용 규칙은 이미지와 별도 텍스트로 캔바에서 작업하는 게 깔끔합니다."},{"num":"23","title":"추천 도서 북큐레이션 카드","bad":"추천 도서 이미지.","good":"추천 도서 북큐레이션 SNS 카드, 나무 테이블 위 책들과 잎사귀·커피잔, 따뜻하고 감성적인 분위기. AR 1:1.","tip":"책 표지를 비워두면 실제 책 표지 이미지를 캔바에서 나중에 넣을 수 있어요."},{"num":"24","title":"독서퀴즈대회 홍보 포스터","bad":"독서 퀴즈 대회 이미지.","good":"독서퀴즈대회 홍보 포스터, 책 위에서 빛나는 전구, 지적이고 호기심 넘치는 분위기. AR 4:5.","tip":"일러스트 스타일로 요청하면 더 창의적이고 흥미로운 이미지가 나옵니다."},{"num":"25","title":"1학생 1책 읽기 캠페인","bad":"독서 캠페인 이미지.","good":"독서 캠페인 포스터, 책을 꼭 쥔 작은 손, 알록달록한 서가 배경, 따뜻한 독서 캠페인. AR 4:5.","tip":"초등학교 캠페인은 손·소품 클로즈업이 얼굴 없이도 따뜻하게 표현됩니다."},{"num":"26","title":"독후감 대회 안내 포스터","bad":"독후감 대회 이미지.","good":"독후감 대회 안내 포스터, 펼쳐진 노트 위에 만년필로 쓰는 손, 진지하고 차분한 독후감 대회. AR 4:5.","tip":"만년필 대신 태블릿 스타일로 요청하면 현대적인 느낌이 납니다."},{"num":"27","title":"저자 강연회·작가 방문 홍보","bad":"작가 강연회 이미지.","good":"저자 강연회 홍보 포스터, 강연장 마이크와 열린 책, 지적이고 설레는 작가 강연회 분위기. AR 4:5.","tip":"강연자 이름과 얼굴은 텍스트·사진으로 후편집하세요."},{"num":"28","title":"도서관 주간 행사 포스터","bad":"도서관 주간 행사 이미지.","good":"도서관 주간 행사 포스터, 서가 사이에서 책을 읽는 뒷모습, 신비롭고 따뜻한 분위기. AR 4:5.","tip":"책에서 세계가 펼쳐지는 판타지 스타일이 학생들에게 인기가 많습니다."},{"num":"29","title":"북아트·독서체험 활동 안내","bad":"북아트 활동 이미지.","good":"북아트 활동 안내 이미지, 색종이·가위·리본으로 책을 꾸미는 손, 밝고 창의적인 북아트 활동. AR 1:1.","tip":"활동 사진 분위기로 요청하면 실제 수업 느낌이 납니다."},{"num":"30","title":"전교생 독서량 달성 축하","bad":"독서 목표 달성 이미지.","good":"독서 목표 달성 축하 SNS 이미지, 트로피와 별, 골드·퍼플의 고급스러운 독서 목표 달성 축하 이미지. AR 1:1.","tip":"달성 권수는 이미지에 넣지 말고 텍스트로 따로 추가하세요."}]},{"id":"04","name":"진학·입시","items":[{"num":"31","title":"고입 입시설명회 안내 포스터","bad":"고입 설명회 포스터 이미지.","good":"고입 입시설명회 안내 포스터, 정돈된 책상 위 노트북과 서류, 신뢰감 있는 네이비·화이트. AR 4:5.","tip":"입시 이미지는 신뢰감 있는 네이비·그레이 계열이 학부모 대상에 효과적입니다."},{"num":"32","title":"대입 수시설명회 홍보","bad":"대입 설명회 이미지.","good":"대입 수시설명회 홍보 포스터, 졸업장과 합격 봉투, 희망차고 진지한 분위기. AR 4:5.","tip":"특정 대학 로고는 절대 생성하지 마세요. 저작권·상표권 문제가 됩니다."},{"num":"33","title":"진로탐색의 날 행사 이미지","bad":"진로탐색 행사 이미지.","good":"진로탐색의 날 행사 포스터, 다양한 직업 소품들이 창의적으로 배치된 밝고 가능성 가득한 진로탐색. AR 4:5.","tip":"직업 소품을 학생들이 관심 있는 분야로 맞추면 반응이 좋습니다."},{"num":"34","title":"진학상담 주간 안내","bad":"진학 상담 안내 이미지.","good":"진학상담 주간 안내 가정통신문, 상담 테이블 위 자료와 커피잔, 차분하고 신뢰감 있는 분위기. AR 4:5.","tip":"상담 이미지는 편안하고 안심감 있는 따뜻한 톤이 좋습니다."},{"num":"35","title":"직업체험 프로그램 홍보","bad":"직업체험 활동 이미지.","good":"직업체험 프로그램 홍보 포스터, 직업 유니폼들이 걸린 행어, 가능성 가득하고 밝은 분위기. AR 4:5.","tip":"유니폼 소품만으로 구성하면 얼굴 없이도 직업 다양성이 잘 표현됩니다."},{"num":"36","title":"수능 D-Day 카운트다운 이미지","bad":"수능 응원 이미지.","good":"수능 D-Day 카운트다운 SNS 이미지, 책상 위 연필·시계, 집중하는 수험생의 손, 진지하고 긴장된 분위기. AR 1:1.","tip":"D-Day 숫자는 카피 여백에 텍스트로 추가하세요."},{"num":"37","title":"고3 수험생 응원 이미지","bad":"수험생 응원 이미지.","good":"고3 수험생 응원 SNS 이미지, 밤 독서등 빛과 펼쳐진 교재, 따뜻하고 격려하는 수험생 응원 이미지. AR 1:1.","tip":"합격 메시지 등 한글은 깨지니까 카피 여백에 직접 입력하세요."},{"num":"38","title":"학과 소개·직업 강연 포스터","bad":"학과 소개 강연 이미지.","good":"직업 강연 홍보 포스터, 강연 마이크와 학과 소품, 전문적이고 세련된 분위기. AR 4:5.","tip":"특정 학과를 정해 그에 맞는 소품을 요청하면 더 구체적인 이미지가 나옵니다."},{"num":"39","title":"진로 포트폴리오 안내","bad":"진로 포트폴리오 이미지.","good":"진로 포트폴리오 안내 이미지, 바인더와 서류 파일이 정돈된 책상, 체계적이고 전문적인 분위기. AR 4:5.","tip":"포트폴리오 표지는 파워포인트에서 따로 디자인하세요."},{"num":"40","title":"졸업생 진학 현황 홍보","bad":"졸업생 진학 현황 이미지.","good":"졸업생 진학 현황 SNS 이미지, 학사모와 꽃가루, 골드·퍼플의 희망차고 축제 같은 분위기. AR 1:1.","tip":"진학 수치는 텍스트 오버레이로 추가하세요."}]},{"id":"05","name":"생활교육·캠페인","items":[{"num":"41","title":"학교폭력 예방 캠페인 포스터","bad":"학교폭력 예방 이미지.","good":"학교폭력 예방 캠페인 포스터, 여러 손이 하나로 모이는 따뜻하고 연대감 있는 장면. AR 4:5.","tip":"손이 모이는 이미지가 연대와 보호를 가장 직관적으로 표현합니다."},{"num":"42","title":"사이버폭력 예방 SNS 카드","bad":"사이버폭력 예방 이미지.","good":"사이버폭력 예방 SNS 카드, 스마트폰 화면에서 하트가 나오는 따뜻하고 긍정적인 분위기. AR 1:1.","tip":"부정적 장면보다 긍정적 대안을 보여주는 이미지가 더 효과적입니다."},{"num":"43","title":"교통안전 교육 안내 이미지","bad":"교통안전 교육 이미지.","good":"교통안전 교육 안내 포스터, 횡단보도 앞에서 손을 드는 어린이의 팔, 밝고 안전한 분위기. AR 4:5.","tip":"교통안전은 손을 드는 동작 클로즈업이 메시지를 가장 직관적으로 전달합니다."},{"num":"44","title":"금연·금주 예방교육 포스터","bad":"금연 교육 이미지.","good":"금연·금주 예방교육 포스터, 건강한 과일과 운동화가 담배보다 크고 밝게, 건강한 라이프스타일 강조. AR 4:5.","tip":"부정적 소품보다 건강한 대안 소품을 더 크게 배치하는 것이 효과적입니다."},{"num":"45","title":"스마트폰 바른 사용 캠페인","bad":"스마트폰 사용 예절 이미지.","good":"스마트폰 바른 사용 캠페인 포스터, 스마트폰을 내려놓고 음료를 든 손들, 따뜻한 오프라인 소통 분위기. AR 4:5.","tip":"스마트폰을 내려놓는 행동이 자연스럽게 담긴 구성이 설득력 있습니다."},{"num":"46","title":"급식 예절·식사 지도 안내","bad":"급식 안내 이미지.","good":"급식 예절 안내 이미지, 급식 트레이 위 균형 잡힌 식단, 건강하고 깔끔한 분위기. AR 1:1.","tip":"급식 식단은 실제 식단 사진과 조합해서 사용하면 더 현실감 있습니다."},{"num":"47","title":"환경·분리수거 캠페인","bad":"환경 캠페인 학교 이미지.","good":"환경·분리수거 캠페인 포스터, 재활용품과 초록 식물, 지구 일러스트, 밝고 희망찬 분위기. AR 4:5.","tip":"일러스트 스타일을 요청하면 저작권 문제 없이 깔끔합니다."},{"num":"48","title":"에너지 절약 캠페인 포스터","bad":"에너지 절약 이미지.","good":"에너지 절약 캠페인 포스터, 전등 스위치를 끄는 손과 켜진·꺼진 조명 대비, 에너지 절약 메시지. AR 4:5.","tip":"전등 스위치 클로즈업이 에너지 절약 메시지를 가장 직접적으로 전달합니다."},{"num":"49","title":"두발·복장 안내 가정통신문","bad":"두발 복장 규정 이미지.","good":"두발·복장 안내 가정통신문, 행어에 걸린 깔끔한 교복 상의, 단정하고 차분한 분위기. AR 4:5.","tip":"교복은 일반 남색으로 요청하되 로고나 마크는 명시적으로 금지하세요."},{"num":"50","title":"인성교육 공감 캠페인","bad":"인성교육 캠페인 이미지.","good":"인성교육 캠페인 포스터, 우산을 씌워주는 두 사람의 손, 따뜻하고 공감이 느껴지는 분위기. AR 4:5.","tip":"손과 소품으로만 구성해도 공감과 배려의 메시지가 충분히 전달됩니다."}]},{"id":"06","name":"문화·예술행사","items":[{"num":"51","title":"학예발표회 홍보 포스터","bad":"학예발표회 포스터 이미지.","good":"학예발표회 홍보 포스터, 무대 조명 아래 마이크와 악기, 화려하고 설레는 분위기. AR 4:5.","tip":"무대 커튼과 조명만으로도 공연 분위기를 충분히 전달할 수 있습니다."},{"num":"52","title":"교내 음악 발표회 포스터","bad":"음악 발표회 학교 이미지.","good":"음악 발표회 홍보 포스터, 피아노 건반과 바이올린, 따뜻한 공연장 조명, 클래식하고 우아한 음악회. AR 4:5.","tip":"악기 클로즈업과 따뜻한 조명 조합이 음악회 분위기를 고급스럽게 만들어줍니다."},{"num":"53","title":"미술 작품 전시회 안내","bad":"학교 미술 전시회 이미지.","good":"미술 전시회 안내 포스터, 흰 전시장 벽에 걸린 빈 액자들, 따뜻한 스폿 조명의 세련된 미술 전시회. AR 4:5.","tip":"빈 액자로 구성하면 실제 학생 작품 사진을 나중에 삽입할 수 있어요."},{"num":"54","title":"합창 대회 참가 안내","bad":"합창 대회 이미지.","good":"합창대회 참가 안내 포스터, 악보와 지휘봉, 음표 배경, 따뜻한 하모니 분위기. AR 4:5.","tip":"악보를 배경 텍스처로 사용하되 '읽히는 악보 텍스트 생성 금지'를 명시하세요."},{"num":"55","title":"학교 축제(학교제) 포스터","bad":"학교 축제 포스터 이미지.","good":"학교 축제 홍보 포스터, 풍선과 꽃가루가 쏟아지는 화려하고 설레는 학교 축제 배경. AR 4:5.","tip":"축제 포스터는 여백을 적게 하고 배경을 화려하게 채우는 것이 인기 있습니다."},{"num":"56","title":"교내 사진 콘테스트 안내","bad":"사진 콘테스트 안내 이미지.","good":"사진 콘테스트 안내 포스터, DSLR 카메라와 필름롤, 감성적이고 창의적인 분위기. AR 4:5.","tip":"카메라 소품 클로즈업이 콘테스트의 창의성을 잘 표현합니다."},{"num":"57","title":"연극부·뮤지컬 공연 홍보","bad":"학교 연극 공연 이미지.","good":"연극 공연 홍보 포스터, 붉은 커튼과 황금빛 조명, 연극 마스크, 드라마틱하고 신비로운 분위기. AR 4:5.","tip":"연극 마스크(희극·비극)는 공연의 상징적인 소품으로 잘 활용됩니다."},{"num":"58","title":"댄스부·K-POP 공연 홍보","bad":"댄스 공연 홍보 이미지.","good":"댄스 공연 홍보 포스터, 네온 조명 아래 무대 실루엣, 화려하고 에너지 넘치는 댄스 공연 배경. AR 4:5.","tip":"실루엣 처리만으로도 에너지 넘치는 댄스 공연 느낌을 낼 수 있습니다."},{"num":"59","title":"밴드부·기타 공연 안내","bad":"밴드 공연 이미지.","good":"밴드 공연 홍보 포스터, 기타와 마이크·앰프, 인디 감성의 블랙·골드 밴드 공연 분위기. AR 4:5.","tip":"악기 클로즈업이 밴드 공연의 분위기를 가장 잘 전달합니다."},{"num":"60","title":"영상·미디어 작품 발표회","bad":"영상 작품 발표회 이미지.","good":"영상 발표회 홍보 포스터, 필름 롤과 클래퍼보드, 따뜻한 필름 톤의 시네마틱 영상 발표회. AR 4:5.","tip":"클래퍼보드는 영상 작품 발표회의 상징적 소품으로 잘 어울립니다."}]},{"id":"07","name":"계절·특별행사","items":[{"num":"61","title":"수학여행 사전 안내 포스터","bad":"수학여행 안내 이미지.","good":"수학여행 안내 포스터, 여행 가방과 카메라·지도, 설레고 기대감 넘치는 분위기. AR 4:5.","tip":"여행지에 맞는 소품(제주면 귤·돌하르방, 경주면 불국사)을 추가하면 더 구체적입니다."},{"num":"62","title":"현장학습 안내 가정통신문","bad":"현장학습 안내 이미지.","good":"현장학습 안내 가정통신문, 배낭·도시락·물통이 놓인 밝고 신나는 소풍 분위기. AR 4:5.","tip":"목적지에 맞는 소품을 구체적으로 명시하면 퀄리티가 높아집니다."},{"num":"63","title":"스승의 날 감사 이미지","bad":"스승의 날 이미지.","good":"스승의 날 감사 SNS 이미지, 나무 테이블 위 카네이션과 감사 편지, 따뜻하고 감사한 스승의 날. AR 1:1.","tip":"카네이션 클로즈업이 스승의 날을 가장 직관적으로 표현합니다."},{"num":"64","title":"여름 캠프 안내 포스터","bad":"여름 캠프 이미지.","good":"여름 캠프 안내 포스터, 텐트·캠프파이어·별하늘, 모험적이고 설레는 여름 캠프 야경. AR 4:5.","tip":"별하늘 배경 야경 캠프 이미지가 학생들에게 가장 인기 있습니다."},{"num":"65","title":"학교 창립기념일 이미지","bad":"학교 창립기념일 이미지.","good":"창립기념일 기념 SNS 이미지, 축하 케이크와 불꽃·색종이, 격조 있고 따뜻한 분위기. AR 1:1.","tip":"학교 상징 컬러를 명시하면 학교 정체성을 살릴 수 있어요."},{"num":"66","title":"학생의 날 기념 이미지","bad":"학생의 날 이미지.","good":"학생의 날 기념 SNS 이미지, 책·연필·학생증과 빛나는 별, 희망차고 활기찬 학생의 날 기념. AR 1:1.","tip":"학생 소품과 축하 요소를 조합하면 기념일 분위기가 자연스럽게 납니다."},{"num":"67","title":"생태 체험 학습 안내","bad":"생태 체험 학습 이미지.","good":"생태 체험 학습 안내 포스터, 숲 속 돋보기와 자연 소품, 호기심 있고 생동감 넘치는 분위기. AR 4:5.","tip":"계절에 맞는 자연 소품(봄 꽃·여름 곤충·가을 낙엽)을 지정하세요."},{"num":"68","title":"문화 예술 공연 관람 안내","bad":"공연 관람 안내 이미지.","good":"공연 관람 안내 가정통신문, 무대 조명과 붉은 커튼, 격조 있고 설레는 공연 관람 안내 이미지. AR 4:5.","tip":"실제 공연 제목이나 로고는 생성하지 말고 텍스트로 추가하세요."},{"num":"69","title":"00의 날 행사 기념 포스터","bad":"환경의 날 이미지 만들어줘.","good":"환경의 날 기념 포스터, 지구와 초록 잎사귀, 일러스트 스타일의 밝고 희망찬 환경의 날 포스터. AR 4:5.","tip":"해당하는 날에 맞는 상징 소품으로 교체하면 독도의 날·과학의 날 등에도 활용 가능합니다."},{"num":"70","title":"수련회·MT 안내 이미지","bad":"수련회 안내 이미지.","good":"수련회 안내 포스터, 캠핑 텐트·캠프파이어·로프, 에너지 넘치고 도전적인 수련회 이미지. AR 4:5.","tip":"수련 프로그램에 맞는 소품(래프팅·암벽)을 구체적으로 요청하세요."}]},{"id":"08","name":"학급 운영","items":[{"num":"71","title":"학급 규칙 게시판 배경","bad":"학급 규칙 게시판 이미지.","good":"학급 규칙 게시판 배경, 코르크보드와 포스트잇이 정돈된 따뜻하고 체계적인 분위기. AR 16:9.","tip":"텍스트는 배경 이미지만 만든 후 파워포인트에서 추가하세요."},{"num":"72","title":"모둠 활동 안내 이미지","bad":"모둠 활동 이미지.","good":"모둠 활동 안내 이미지, 원형 책상 위에 모이는 여러 손, 협력적이고 밝은 모둠 활동 이미지. AR 1:1.","tip":"손 모임 구도가 팀워크를 가장 간결하게 표현합니다."},{"num":"73","title":"학급 신문 표지 배경","bad":"학급 신문 이미지.","good":"학급 신문 표지 배경, 신문·잡지 느낌의 빈 컬럼 레이아웃, 깔끔하고 정갈한 분위기. AR 4:5.","tip":"신문 느낌의 컬럼 레이아웃을 배경으로만 만들고 텍스트는 파워포인트에서 작업하세요."},{"num":"74","title":"자기 소개 카드 배경","bad":"자기 소개 카드 이미지.","good":"자기소개 카드 배경, 귀여운 일러스트 테두리와 빈 공간, 알록달록한 파스텔 분위기. AR 1:1.","tip":"일러스트 스타일로 요청하면 인쇄해서 바로 사용하기 좋습니다."},{"num":"75","title":"학급 목표 시각화 포스터","bad":"학급 목표 포스터 이미지.","good":"학급 목표 포스터, 산 정상을 향해 오르는 실루엣, 희망차고 도전적인 학급 목표 포스터. AR 4:5.","tip":"성장·도전을 상징하는 시각 메타포가 목표 시각화에 효과적입니다."},{"num":"76","title":"1인 1역 역할 게시판","bad":"1인1역 게시판 이미지.","good":"1인1역 게시판 배경, 청소 도구·화분·지우개 아이콘, 귀엽고 알록달록한 분위기. AR 16:9.","tip":"역할 소품을 아이콘 스타일로 요청하면 인쇄 품질이 좋습니다."},{"num":"77","title":"학급 상담 주간 안내","bad":"학급 상담 이미지.","good":"상담 주간 안내 이미지, 티컵 두 개와 메모장·화분, 편안하고 신뢰감 있는 분위기. AR 1:1.","tip":"따뜻한 색감의 실내 공간 구성이 상담의 안심 분위기를 만들어줍니다."},{"num":"78","title":"독서 기록장·독서 일지 표지","bad":"독서 기록장 표지 이미지.","good":"독서 기록장 표지, 책·연필·북마크·식물, 아늑하고 따뜻한 독서 기록장 표지. AR 4:5.","tip":"인쇄 후 바로 배부할 수 있도록 텍스트 여백을 크게 잡으세요."},{"num":"79","title":"학급 청소 구역 안내판","bad":"청소 구역 안내 이미지.","good":"청소 구역 안내판, 청소 도구 아이콘들, 밝고 청결한 파스텔 분위기. AR 1:1.","tip":"청소 도구 아이콘 일러스트로 요청하면 인쇄해서 바로 붙일 수 있습니다."},{"num":"80","title":"학급 타임캡슐 이미지","bad":"학급 타임캡슐 이미지.","good":"타임캡슐 안내 이미지, 나무 상자와 편지 봉투, 세피아·브라운의 따뜻하고 추억 어린 분위기. AR 1:1.","tip":"세피아·브라운 빈티지 감성이 타임캡슐의 추억 분위기를 잘 표현합니다."}]},{"id":"09","name":"가정통신문·공지","items":[{"num":"81","title":"학부모 총회 안내 이미지","bad":"학부모 총회 안내 이미지.","good":"학부모 총회 안내 가정통신문, 회의실 책상 위 서류와 볼펜, 신뢰감 있는 네이비·화이트의 학부모 총회. AR 4:5.","tip":"공식 행사는 신뢰감 있는 네이비·그레이 계열이 학부모 신뢰를 높입니다."},{"num":"82","title":"학부모 상담 주간 안내","bad":"학부모 상담 이미지.","good":"학부모 상담 주간 안내 가정통신문, 티컵 두 개와 화분·메모장, 따뜻하고 편안한 분위기. AR 4:5.","tip":"티컵 두 개 구성이 1:1 상담의 따뜻한 분위기를 자연스럽게 표현합니다."},{"num":"83","title":"방과후 수업 모집 안내","bad":"방과후 수업 안내 이미지.","good":"방과후 수업 모집 안내 포스터, 악보·축구공·붓·로봇 부품, 밝고 다채로운 방과후 수업 모집 이미지. AR 4:5.","tip":"방과후 종목에 맞는 소품을 구체적으로 나열하면 더 명확합니다."},{"num":"84","title":"급식 메뉴 안내 이미지","bad":"학교 급식 안내 이미지.","good":"급식 메뉴 안내 이미지, 급식 트레이 위 균형 잡힌 식단, 건강하고 식욕 돋는 분위기. AR 1:1.","tip":"식단은 실제 사진으로 교체하거나 메뉴 텍스트를 캔바에서 추가하세요."},{"num":"85","title":"건강검진 안내 이미지","bad":"학교 건강검진 안내 이미지.","good":"건강검진 안내 가정통신문, 청진기와 체온계, 신뢰감 있고 청결한 흰색·파랑. AR 4:5.","tip":"의료 소품만으로 구성하면 학생·학부모 모두에게 안심감을 줍니다."},{"num":"86","title":"학교폭력 신고 안내 이미지","bad":"학교폭력 신고 안내 이미지.","good":"학교폭력 신고 안내 포스터, 전화기와 손길·하트, 따뜻하고 안심감 있는 분위기. AR 4:5.","tip":"신고 번호(117)는 이미지에 생성하지 말고 큰 텍스트로 직접 추가하세요."},{"num":"87","title":"개인정보 보호 안내","bad":"개인정보 보호 이미지.","good":"개인정보 보호 안내 포스터, 자물쇠와 방패, 신뢰감 있고 안전한 분위기. AR 4:5.","tip":"디지털 보안 이미지는 자물쇠·방패 소품이 메시지를 직관적으로 전달합니다."},{"num":"88","title":"봉사활동 안내 이미지","bad":"봉사활동 안내 이미지.","good":"봉사활동 안내 포스터, 봉사 장갑과 나눔의 손, 따뜻하고 이타적인 분위기. AR 4:5.","tip":"봉사 유형(환경·복지·지역사회)에 맞는 소품으로 변경해서 사용하세요."},{"num":"89","title":"원격 수업·온라인 학습 안내","bad":"온라인 수업 안내 이미지.","good":"원격 수업 안내 가정통신문, 노트북·태블릿·이어폰, 아늑한 홈스쿨링 책상의 원격 수업 안내. AR 4:5.","tip":"원격 수업 플랫폼 로고는 저작권 문제로 생성하지 마세요."},{"num":"90","title":"교복 구입·착용 안내","bad":"교복 안내 이미지.","good":"교복 구입 안내 가정통신문, 깔끔하게 개어진 교복 상의, 단정하고 신뢰감 있는 교복 구입 안내. AR 4:5.","tip":"교복 로고와 마크는 반드시 금지사항에 명시하세요."}]},{"id":"10","name":"학교 홍보·SNS","items":[{"num":"91","title":"학교 SNS 인스타그램 게시물","bad":"학교 인스타그램 이미지.","good":"학교 SNS 게시물, 봄 교정의 벚꽃과 학교 건물 실루엣, 감성적이고 따뜻한 분위기. AR 1:1.","tip":"계절별로 4장 시리즈로 제작하면 SNS 피드가 통일감 있게 꾸며집니다."},{"num":"92","title":"신입생 모집 홍보 포스터","bad":"신입생 모집 홍보 이미지.","good":"신입생 모집 홍보 포스터, 새 교복과 책가방, 봄 벚꽃 교문 배경, 설레는 신입생 모집 이미지. AR 4:5.","tip":"입학식 시즌(2~3월)에 맞춰 벚꽃 소품을 활용하면 계절감이 살아납니다."},{"num":"93","title":"학교 소개 브로슈어 커버","bad":"학교 소개 이미지.","good":"학교 소개 브로슈어 커버, 학교 건물과 학생 실루엣, 세련되고 모던한 분위기. AR 4:5.","tip":"학교명은 이미지에 생성하지 말고 나중에 직접 텍스트를 얹어주세요."},{"num":"94","title":"우수 학생 시상 SNS 이미지","bad":"우수 학생 시상 이미지.","good":"우수 학생 시상 SNS 이미지, 트로피와 메달·꽃다발, 골드·크림의 고급스러운 우수 학생 시상 이미지. AR 1:1.","tip":"시상 이미지에서 수상자 이름은 반드시 텍스트로 따로 추가하세요."},{"num":"95","title":"학교 환경 개선 공사 안내","bad":"학교 공사 안내 이미지.","good":"학교 공사 안내 이미지, 공사 헬멧과 설계 도면, 신뢰감 있고 전문적인 분위기. AR 4:5.","tip":"공사 기간과 대상 구역은 텍스트로 크게 추가해야 학부모에게 명확히 전달됩니다."},{"num":"96","title":"방과후 프로그램 홍보 이미지","bad":"방과후 프로그램 이미지.","good":"방과후 프로그램 홍보 SNS 이미지, 악보·운동화·로봇 키트·붓, 밝고 다채로운 분위기. AR 1:1.","tip":"운영 중인 방과후 종목 소품을 구체적으로 나열하면 더 맞춤형 이미지가 됩니다."},{"num":"97","title":"교직원 연수 안내 이미지","bad":"교직원 연수 이미지.","good":"교직원 연수 안내 포스터, 노트북과 연수 자료·커피, 전문적이고 차분한 교직원 연수 이미지. AR 4:5.","tip":"연수 주제에 맞는 소품(AI 교육이면 태블릿·로봇)을 추가하면 더 구체적입니다."},{"num":"98","title":"학부모 독서 교실 안내","bad":"학부모 독서 프로그램 이미지.","good":"학부모 독서 교실 안내 포스터, 책·독서등·차·안경, 따뜻하고 지적인 학부모 독서 교실 포스터. AR 4:5.","tip":"학부모 대상은 어른스럽고 고급스러운 톤이 참여율을 높입니다."},{"num":"99","title":"학교 성과 보고서 커버","bad":"학교 성과 보고서 이미지.","good":"학교 성과 보고서 커버, 성장하는 그래프와 트로피, 전문적이고 신뢰감 있는 분위기. AR 4:5.","tip":"학교 상징 컬러를 명시하면 학교 정체성이 자연스럽게 표현됩니다."},{"num":"100","title":"학교 슬로건 시각화 이미지","bad":"학교 슬로건 이미지.","good":"학교 슬로건 시각화 포스터, 성장하는 나무 또는 날아오르는 새, 희망적인 일러스트의 학교 슬로건 이미지. AR 4:5.","tip":"학교 슬로건은 텍스트 가독성이 핵심이니 여백을 최대한 크게 잡으세요."}]}]
 </script>
 
+<script>window._IMGS={"img_01_01": "https://raw.githubusercontent.com/kimju1416/school-images/main/01.png", "img_01_02": "https://raw.githubusercontent.com/kimju1416/school-images/main/02.png", "img_01_03": "https://raw.githubusercontent.com/kimju1416/school-images/main/03.png", "img_01_04": "https://raw.githubusercontent.com/kimju1416/school-images/main/04.png", "img_01_05": "https://raw.githubusercontent.com/kimju1416/school-images/main/05.png", "img_01_06": "https://raw.githubusercontent.com/kimju1416/school-images/main/06.png", "img_01_07": "https://raw.githubusercontent.com/kimju1416/school-images/main/07.png", "img_01_08": "https://raw.githubusercontent.com/kimju1416/school-images/main/08.png", "img_01_09": "https://raw.githubusercontent.com/kimju1416/school-images/main/09.png", "img_01_10": "https://raw.githubusercontent.com/kimju1416/school-images/main/10.png", "img_02_11": "https://raw.githubusercontent.com/kimju1416/school-images/main/11.png", "img_02_12": "https://raw.githubusercontent.com/kimju1416/school-images/main/12.png", "img_02_13": "https://raw.githubusercontent.com/kimju1416/school-images/main/13.png", "img_02_14": "https://raw.githubusercontent.com/kimju1416/school-images/main/14.png", "img_02_15": "https://raw.githubusercontent.com/kimju1416/school-images/main/15.png", "img_02_16": "https://raw.githubusercontent.com/kimju1416/school-images/main/16.png", "img_02_17": "https://raw.githubusercontent.com/kimju1416/school-images/main/17.png", "img_02_18": "https://raw.githubusercontent.com/kimju1416/school-images/main/18.png", "img_02_19": "https://raw.githubusercontent.com/kimju1416/school-images/main/19.png", "img_02_20": "https://raw.githubusercontent.com/kimju1416/school-images/main/20.png", "img_03_21": "https://raw.githubusercontent.com/kimju1416/school-images/main/21.png", "img_03_22": "https://raw.githubusercontent.com/kimju1416/school-images/main/22.png", "img_03_23": "https://raw.githubusercontent.com/kimju1416/school-images/main/23.png", "img_03_24": "https://raw.githubusercontent.com/kimju1416/school-images/main/24.png", "img_03_25": "https://raw.githubusercontent.com/kimju1416/school-images/main/25.png", "img_03_26": "https://raw.githubusercontent.com/kimju1416/school-images/main/26.png", "img_03_27": "https://raw.githubusercontent.com/kimju1416/school-images/main/27.png", "img_03_28": "https://raw.githubusercontent.com/kimju1416/school-images/main/28.png", "img_03_29": "https://raw.githubusercontent.com/kimju1416/school-images/main/29.png", "img_03_30": "https://raw.githubusercontent.com/kimju1416/school-images/main/30.png", "img_04_31": "https://raw.githubusercontent.com/kimju1416/school-images/main/31.png", "img_04_32": "https://raw.githubusercontent.com/kimju1416/school-images/main/32.png", "img_04_33": "https://raw.githubusercontent.com/kimju1416/school-images/main/33.png", "img_04_34": "https://raw.githubusercontent.com/kimju1416/school-images/main/34.png", "img_04_35": "https://raw.githubusercontent.com/kimju1416/school-images/main/35.png", "img_04_36": "https://raw.githubusercontent.com/kimju1416/school-images/main/36.png", "img_04_37": "https://raw.githubusercontent.com/kimju1416/school-images/main/37.png", "img_04_38": "https://raw.githubusercontent.com/kimju1416/school-images/main/38.png", "img_04_39": "https://raw.githubusercontent.com/kimju1416/school-images/main/39.png", "img_04_40": "https://raw.githubusercontent.com/kimju1416/school-images/main/40.png", "img_05_41": "https://raw.githubusercontent.com/kimju1416/school-images/main/41.png", "img_05_42": "https://raw.githubusercontent.com/kimju1416/school-images/main/42.png", "img_05_43": "https://raw.githubusercontent.com/kimju1416/school-images/main/43.png", "img_05_44": "https://raw.githubusercontent.com/kimju1416/school-images/main/44.png", "img_05_45": "https://raw.githubusercontent.com/kimju1416/school-images/main/45.png", "img_05_46": "https://raw.githubusercontent.com/kimju1416/school-images/main/46.png", "img_05_47": "https://raw.githubusercontent.com/kimju1416/school-images/main/47.png", "img_05_48": "https://raw.githubusercontent.com/kimju1416/school-images/main/48.png", "img_05_49": "https://raw.githubusercontent.com/kimju1416/school-images/main/49.png", "img_05_50": "https://raw.githubusercontent.com/kimju1416/school-images/main/50.png", "img_06_51": "https://raw.githubusercontent.com/kimju1416/school-images/main/51.png", "img_06_52": "https://raw.githubusercontent.com/kimju1416/school-images/main/52.png", "img_06_53": "https://raw.githubusercontent.com/kimju1416/school-images/main/53.png", "img_06_54": "https://raw.githubusercontent.com/kimju1416/school-images/main/54.png", "img_06_55": "https://raw.githubusercontent.com/kimju1416/school-images/main/55.png", "img_06_56": "https://raw.githubusercontent.com/kimju1416/school-images/main/56.png", "img_06_57": "https://raw.githubusercontent.com/kimju1416/school-images/main/57.png", "img_06_58": "https://raw.githubusercontent.com/kimju1416/school-images/main/58.png", "img_06_59": "https://raw.githubusercontent.com/kimju1416/school-images/main/59.png", "img_06_60": "https://raw.githubusercontent.com/kimju1416/school-images/main/60.png", "img_07_61": "https://raw.githubusercontent.com/kimju1416/school-images/main/61.png", "img_07_62": "https://raw.githubusercontent.com/kimju1416/school-images/main/62.png", "img_07_63": "https://raw.githubusercontent.com/kimju1416/school-images/main/63.png", "img_07_64": "https://raw.githubusercontent.com/kimju1416/school-images/main/64.png", "img_07_65": "https://raw.githubusercontent.com/kimju1416/school-images/main/65.png", "img_07_66": "https://raw.githubusercontent.com/kimju1416/school-images/main/66.png", "img_07_67": "https://raw.githubusercontent.com/kimju1416/school-images/main/67.png", "img_07_68": "https://raw.githubusercontent.com/kimju1416/school-images/main/68.png", "img_07_69": "https://raw.githubusercontent.com/kimju1416/school-images/main/69.png", "img_07_70": "https://raw.githubusercontent.com/kimju1416/school-images/main/70.png", "img_08_71": "https://raw.githubusercontent.com/kimju1416/school-images/main/71.png", "img_08_72": "https://raw.githubusercontent.com/kimju1416/school-images/main/72.png", "img_08_73": "https://raw.githubusercontent.com/kimju1416/school-images/main/73.png", "img_08_74": "https://raw.githubusercontent.com/kimju1416/school-images/main/74.png", "img_08_75": "https://raw.githubusercontent.com/kimju1416/school-images/main/75.png", "img_08_76": "https://raw.githubusercontent.com/kimju1416/school-images/main/76.png", "img_08_77": "https://raw.githubusercontent.com/kimju1416/school-images/main/77.png", "img_08_78": "https://raw.githubusercontent.com/kimju1416/school-images/main/78.png", "img_08_79": "https://raw.githubusercontent.com/kimju1416/school-images/main/79.png", "img_08_80": "https://raw.githubusercontent.com/kimju1416/school-images/main/80.png", "img_09_81": "https://raw.githubusercontent.com/kimju1416/school-images/main/81.png", "img_09_82": "https://raw.githubusercontent.com/kimju1416/school-images/main/82.png", "img_09_83": "https://raw.githubusercontent.com/kimju1416/school-images/main/83.png", "img_09_84": "https://raw.githubusercontent.com/kimju1416/school-images/main/84.png", "img_09_85": "https://raw.githubusercontent.com/kimju1416/school-images/main/85.png", "img_09_86": "https://raw.githubusercontent.com/kimju1416/school-images/main/86.png", "img_09_87": "https://raw.githubusercontent.com/kimju1416/school-images/main/87.png", "img_09_88": "https://raw.githubusercontent.com/kimju1416/school-images/main/88.png", "img_09_89": "https://raw.githubusercontent.com/kimju1416/school-images/main/89.png", "img_09_90": "https://raw.githubusercontent.com/kimju1416/school-images/main/90.png", "img_10_91": "https://raw.githubusercontent.com/kimju1416/school-images/main/91.png", "img_10_92": "https://raw.githubusercontent.com/kimju1416/school-images/main/92.png", "img_10_93": "https://raw.githubusercontent.com/kimju1416/school-images/main/93.png", "img_10_94": "https://raw.githubusercontent.com/kimju1416/school-images/main/94.png", "img_10_95": "https://raw.githubusercontent.com/kimju1416/school-images/main/95.png", "img_10_96": "https://raw.githubusercontent.com/kimju1416/school-images/main/96.png", "img_10_97": "https://raw.githubusercontent.com/kimju1416/school-images/main/97.png", "img_10_98": "https://raw.githubusercontent.com/kimju1416/school-images/main/98.png", "img_10_99": "https://raw.githubusercontent.com/kimju1416/school-images/main/99.png", "img_10_100": "https://raw.githubusercontent.com/kimju1416/school-images/main/100.png"};</script>
 <script>
 var CATS=JSON.parse(document.getElementById('cats-data').textContent);
 var CMDS=['학생 얼굴 없이 뒷모습·실루엣으로만 바꿔줘','텍스트 생성 절대 금지, 여백만 확보해줘','배경을 학교 운동장으로 바꿔줘','배경을 교실 내부로 바꿔줘','배경을 체육관으로 바꿔줘','분위기를 더 밝고 활기차게 바꿔줘','분위기를 차분하고 정중하게 바꿔줘','카피 여백을 상단 30%로 넓혀줘','소품을 2개 이하로 줄여줘','비율을 16:9로 바꿔줘','비율을 1:1로 바꿔줘','봄 벚꽃 계절감으로 바꿔줘','가을 단풍 계절감으로 바꿔줘','일러스트 스타일로 바꿔줘','포스터 구도로 더 임팩트 있게 바꿔줘','학부모 대상 느낌으로 더 신뢰감 있게 바꿔줘','조명을 더 밝고 따뜻하게 바꿔줘','교복은 일반 남색으로, 로고 없이 해줘','손·소품 클로즈업 구도로만 바꿔줘','학교 건물 실루엣을 배경에 추가해줘'];
@@ -815,10 +821,8 @@ function generatePrompt(){
   if(copyPos)prompt+=copyPos+'에 카피 여백 확보. ';
   if(mood)prompt+='분위기: '+mood+'. ';
   prompt+='AR '+ratioNum+'. ';
-  prompt+='금지: 깨진 한글, 학생 얼굴 식별, 학교명·교복 로고 직접 생성';
-  if(forbidden)prompt+=', '+forbidden;
-  prompt+='.';
-  document.getElementById('result').innerHTML='<span class="result-box-text" id="promptContent">'+prompt+'</span><button class="result-copy-btn" onclick="copyResult()">📋 복사하기</button>';
+  if(forbidden)prompt+='금지사항: '+forbidden+'. ';
+  var el=document.getElementById('promptContent');if(el)el.textContent=prompt;
 }
 
 function applyCmd(cmd){
@@ -827,10 +831,10 @@ function applyCmd(cmd){
   var current=contentEl?contentEl.textContent.trim():resultEl.innerText.replace('📋 복사하기','').trim();
   var placeholder='왼쪽 폼을 채우고 생성 버튼을 누르세요.';
   var newText=(current&&current!==placeholder)?current+' [수정] '+cmd:'[수정 요청] '+cmd;
-  resultEl.innerHTML='<span class="result-box-text" id="promptContent">'+newText+'</span><button class="result-copy-btn" onclick="copyResult()">📋 복사하기</button>';
+  var el=document.getElementById('promptContent');if(el)el.textContent=newText;
 }
 
-function copyResult(){var el=document.getElementById('promptContent');var txt=el?el.textContent.trim():'';navigator.clipboard.writeText(txt).then(showCopied)}
+function copyResult(){var el=document.getElementById('promptContent');var txt=el?el.innerText.trim():'';if(txt)navigator.clipboard.writeText(txt).then(showCopied)}
 function showCopied(){var msg=document.getElementById('copiedMsg');msg.style.display='block';setTimeout(function(){msg.style.display='none'},2000)}
 
 function toggleCat(catId){var el=document.getElementById('citems-'+catId);var tog=document.getElementById('ctog-'+catId);if(!el)return;var collapsed=el.classList.toggle('collapsed');if(tog)tog.textContent=collapsed?'▼':'▲'}
@@ -870,15 +874,7 @@ function renderImgSection(container,catId,num){
     var img=document.createElement('img');img.className='detail-img';img.src=imgUrl;
     img.onerror=function(){var err=document.createElement('div');err.className='detail-img-err';err.textContent='이미지를 불러올 수 없어요.';card.replaceChild(err,img);};
     card.appendChild(img);
-    var actions=document.createElement('div');actions.className='detail-img-actions';
-    var editBtn=document.createElement('button');editBtn.className='img-edit-btn';editBtn.textContent='🔄 이미지 변경';editBtn.onclick=function(){editImg(catId,num);};
-    var delBtn=document.createElement('button');delBtn.className='img-del-btn';delBtn.textContent='🗑 삭제';delBtn.onclick=function(){removeImg(catId,num);};
-    actions.appendChild(editBtn);actions.appendChild(delBtn);card.appendChild(actions);wrap.appendChild(card);
-  }else{
-    var addBtn=document.createElement('button');addBtn.className='add-img-btn';
-    addBtn.innerHTML='<span>+</span> 예시 이미지 URL 등록하기';
-    addBtn.onclick=function(){editImg(catId,num);};
-    wrap.appendChild(addBtn);
+    wrap.appendChild(card);
   }
   container.appendChild(wrap);
 }
@@ -889,10 +885,7 @@ function libSearch2(){var q=document.getElementById('libSearch2').value.toLowerC
 function getImg(catId,num){var key='img_'+catId+'_'+num;if(window._IMGS&&window._IMGS[key])return window._IMGS[key];try{return localStorage.getItem(key)||'';}catch(e){return '';}}
 function setImg(catId,num,url){var key='img_'+catId+'_'+num;try{localStorage.setItem(key,url);}catch(e){}if(!window._IMGS)window._IMGS={};window._IMGS[key]=url;updateImgCount();}
 function deleteImg(catId,num){var key='img_'+catId+'_'+num;try{localStorage.removeItem(key);}catch(e){}if(window._IMGS)delete window._IMGS[key];updateImgCount();}
-function updateImgCount(){var count=0;CATS.forEach(function(cat){cat.items.forEach(function(item){if(getImg(cat.id,item.num))count++;});});var el=document.getElementById('imgCount');if(el)el.textContent=count;var btn=document.getElementById('exportBtn');if(btn)btn.disabled=(count===0);}
-function editImg(catId,num){var cur=getImg(catId,num);var url=prompt('이미지 URL 입력 (Imgur 예: https://i.imgur.com/xxxxx.png)',cur||'');if(url===null)return;url=url.trim();if(url){setImg(catId,num,url);selectPrompt(catId,num);}}
-function removeImg(catId,num){if(!confirm('이 이미지를 삭제할까요?'))return;deleteImg(catId,num);selectPrompt(catId,num);}
-function exportWithImages(){var imgs={};CATS.forEach(function(cat){cat.items.forEach(function(item){var url=getImg(cat.id,item.num);if(url)imgs['img_'+cat.id+'_'+item.num]=url;});});var count=Object.keys(imgs).length;if(count===0){alert('등록된 이미지가 없습니다.');return;}if(!confirm(count+'개의 이미지가 포함된 배포용 파일을 생성할까요?'))return;var h=document.documentElement.outerHTML;var inject='<script>window._IMGS='+JSON.stringify(imgs)+';<\/script>';h=h.replace('<script>',inject+'<script>');var blob=new Blob([h],{type:'text/html;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='school-prompt-guide-배포용.html';a.click();showCopied();}
+function updateImgCount(){var count=0;CATS.forEach(function(cat){cat.items.forEach(function(item){if(getImg(cat.id,item.num))count++;});});var el=document.getElementById('imgCount');if(el)el.textContent=count;}
 
 function initCmdChips(){var c=document.getElementById('cmd-chips');if(c&&c.children.length===0){CMDS.forEach(function(cmd){var btn=document.createElement('button');btn.className='cmd-chip';btn.textContent=cmd;btn.addEventListener('click',function(){applyCmd(cmd)});c.appendChild(btn)})}}
 
